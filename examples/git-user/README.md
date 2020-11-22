@@ -19,9 +19,10 @@ Examples given from inside this folder, else you'll need to map the whole path t
 helm3 install {release name} airflow-stable/airflow --namespace {ns} --values {path to values file}
 
 example:
-helm3 install airflow-prod airflow-stable/airflow --namespace airflow-prod --values custom-values.yaml
+helm3 install airflow-prod airflow-stable/airflow  --version 7.13.0 --namespace airflow-prod --values custom-values.yaml
 ```
 
 Give it a few minutes to spin everything up, then push some example dags to your repo and watch them
 appear on the Airflow UI, available at `kubectl get svc -n airflow-prod` -> find the webserver service
-and follow the url:port to the UI. Port forwarding might be necessary
+and follow the url:port to the UI. Port forwarding might be necessary, try that if you can't get to the 
+UI directly with the above method.

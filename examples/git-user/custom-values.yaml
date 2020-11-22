@@ -1,0 +1,47 @@
+airflow:
+  extraPipPackages:
+    - "pandas"
+    - "sqlalchemy"
+    - "psycopg2-binary"
+    - "scipy"
+    - "requests"
+    - "python-dotenv"
+    - "fbprophet"
+    - "scikit-learn"
+    - "keras"
+    - "tensorflow"
+
+workers:
+  resources:
+    requests:
+      cpu: "2000m"
+      memory: "2Gi"
+
+  replicas: 3
+
+  autoscaling:
+    enabled: true
+    maxReplicas: 6
+    metrics: []
+
+web:
+  service:
+    type: NodePort
+
+dags:
+  git:
+    url: "https://airflow:airflow@github.com/org/airflow_dags.git"
+    ref: main
+    gitSync:
+      enabled: true
+      username: "airflow"
+      password: "airflow"
+      resources:
+        requests:
+          cpu: "50m"
+          memory: "64Mi"
+      image:
+        repository: alpine/git
+        tag: latest
+        pullPolicy: IfNotPresent
+      refrestTime: 60
